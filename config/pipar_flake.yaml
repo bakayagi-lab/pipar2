@@ -1,0 +1,48 @@
+name: ZMK Firmware Builder
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'config/**'  # Chỉ kích hoạt khi thay đổi file trong thư mục config
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'config/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Bước 1: Checkout code và submodules
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive  # Quan trọng để clone cả ZMK submodule
+          
+      # Bước 2: Build firmware ZMK
+      - name: Build ZMK Firmware
+        uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+        with:
+          config_path: 'config'  # Thư mục chứa cấu hình
+          build_matrix_path: 'config/builds.yaml'  # File định nghĩa các bản build
+          archive_name: 'zmk-firmware'  # Tên file output
+          
+      # Bước 3: Upload firmware
+      - name: Upload Firmware Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: firmware
+          path: |
+            firmware/*.uf2
+            firmware/*.bin
+          retention-days: 7
+          
+      # Bước 4: Thông báo build thành công (tuỳ chọn)
+      - name: Notify Success
+        if: success()
+        run: |
+          echo "🎉 Firmware built successfully!"
+          echo "Download from the Artifa
