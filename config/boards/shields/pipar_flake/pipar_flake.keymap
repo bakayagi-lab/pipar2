@@ -40,7 +40,7 @@
 
     function_layer {
         // --------------------------- //
-        // | none | none | Layer 2 |   //
+        // | none | SPACE | Layer 2 |   //
         // | none | MUTE |  bt_nxt   |   //
         // | reset | boot | bt_clr |   //
         display-name = "function";
