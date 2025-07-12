@@ -12,11 +12,13 @@
 
 / {
     // --- Thêm đoạn này vào đây ---
+
     sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&encoder_1>;
         triggers-per-rotation = <24>;
     };
+
     // ----------------------------
 
     keymap {
@@ -25,26 +27,30 @@
         default_layer {
             display-name = "default";
             bindings = <
-                &kp ESC  &kp SPACE  &to FUNC
-                &kp BSPC &kp UP     &kp ENTER
-                &kp LEFT &kp DOWN   &kp RIGHT
+&kp ESC   &kp B     &to FUNC
+&kp BSPC  &kp UP    &kp ENTER
+&kp LEFT  &kp DOWN  &kp RIGHT
             >;
-            
+
             // --- Thêm dòng này vào trong default_layer ---
+
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
+
             // --------------------------------------------
         };
 
         function_layer {
             display-name = "function";
             bindings = <
-                &none       &none       &to BASE
-                &none       &kp C_MUTE  &bt BT_NXT
-                &sys_reset  &bootloader &bt BT_CLR
+&none       &none        &to BASE
+&none       &kp C_MUTE   &bt BT_NXT
+&sys_reset  &bootloader  &bt BT_CLR
             >;
-            
+
             // --- Có thể thêm cho cả function_layer nếu cần ---
+
             sensor-bindings = <&inc_dec_kp PG_DN PG_UP>;
+
             // --------------------------------------------
         };
     };
