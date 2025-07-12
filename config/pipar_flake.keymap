@@ -1,6 +1,6 @@
 /*
- * Keymap hoàn chỉnh với encoder cho Corne Keyboard
- * Lưu tại: config/corne.keymap
+ * Keymap cho bàn phím 9 nút + encoder
+ * Layout 3x3 + 1 núm xoay ở vị trí phím [3,3]
  */
 
 #include <behaviors.dtsi>
@@ -21,12 +21,12 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // 2️⃣ Layer chính (3x3 keys + encoder)
+        // 2️⃣ Layer chính (3x3 keys)
         default_layer {
             bindings = <
-                &kp ESC    &kp SPACE   &mo FN      // Encoder tại vị trí [3]
-                &kp BSPC   &kp UP      &kp ENTER
-                &kp LEFT   &kp DOWN    &kp RIGHT
+                &kp Q     &kp W     &kp E      // Hàng 1
+                &kp A     &kp S     &kp D      // Hàng 2
+                &kp Z     &kp X     &mo FN     // Hàng 3 - Phím [3,3] là encoder
             >;
             
             // 🔄 Encoder: Volume (xoay) + Nhấn: Mute
@@ -36,9 +36,9 @@
         // 3️⃣ Layer chức năng
         fn_layer {
             bindings = <
-                &none      &none       &trans      // Giữ nguyên vị trí encoder
-                &none      &kp C_MUTE  &bt BT_NXT
-                &sys_reset &bootloader &bt BT_CLR
+                &kp F1    &kp F2    &kp F3     // Hàng 1
+                &none     &kp C_MUTE &bt BT_NXT // Hàng 2
+                &sys_reset &none    &trans      // Hàng 3 - Giữ nguyên vị trí encoder
             >;
             
             // 🔄 Encoder: Cuộn trang (xoay) + Nhấn: Play/Pause
@@ -47,14 +47,14 @@
     };
 };
 
-// 4️⃣ Cấu hình phần cứng encoder (cho Corne)
+// 4️⃣ Cấu hình phần cứng encoder
 / {
     encoders {
         compatible = "zmk,encoders";
         encoder_1: encoder_1 {
             status = "okay";
-            a-gpios = <&pro_micro 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-            b-gpios = <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+            a-gpios = <&gpio0 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // Chân A
+            b-gpios = <&gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // Chân B
         };
     };
 };
