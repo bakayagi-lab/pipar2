@@ -27,7 +27,7 @@
         default_layer {
             display-name = "default";
             bindings = <
-&kp A     &kp C     &to FUNC
+&kp A     &kp D     &to FUNC
 &kp BSPC  &kp UP    &kp ENTER
 &kp LEFT  &kp DOWN  &kp RIGHT
             >;
