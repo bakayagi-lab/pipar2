@@ -27,9 +27,9 @@
         default_layer {
             display-name = "default";
             bindings = <
-&kp LC(X)  &kp E     &to FUNC
-&kp LC(C)  &kp UP    &kp LC(V)
-&kp LEFT   &kp DOWN  &kp RIGHT
+&kp LC(X)  &kp LC(LEFT_SHIFT)  &to FUNC
+&kp LC(C)  &kp UP              &kp LC(V)
+&kp LEFT   &kp DOWN            &kp RIGHT
             >;
 
             // --- Thêm dòng này vào trong default_layer ---
